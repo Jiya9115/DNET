@@ -11,18 +11,23 @@ namespace EmployeePayrollSystem
     // Base Class
     class Employee : IPayable
     {
-        // Data Members
-        public int EmployeeID;
-        public string Name;
+        // Static variable to generate Employee ID automatically
+        private static int NextID = 1001;
+
+        // Employee Details
+        public int EmployeeID { get; }
+        public string Name { get; set; }
+        public int Age { get; set; }
 
         // Constructor
-        public Employee(int id, string name)
+        public Employee(string name, int age)
         {
-            EmployeeID = id;
+            EmployeeID = NextID++;
             Name = name;
+            Age = age;
         }
 
-        // Virtual Method (Polymorphism)
+        // Virtual Method
         public virtual double CalculateSalary()
         {
             return 0;
@@ -31,50 +36,55 @@ namespace EmployeePayrollSystem
         // Display Employee Details
         public virtual void Display()
         {
-            Console.WriteLine("Employee ID : " + EmployeeID);
-            Console.WriteLine("Employee Name : " + Name);
+            Console.WriteLine("\n-----------------------------");
+            Console.WriteLine("Employee ID   : " + EmployeeID);
+            Console.WriteLine("Name          : " + Name);
+            Console.WriteLine("Age           : " + Age);
         }
     }
 
-    // Derived Class - Full Time Employee
+    // Full Time Employee
     class FullTimeEmployee : Employee
     {
-        public double MonthlySalary;
+        public double BasicSalary;
+        public double Increment;
 
-        public FullTimeEmployee(int id, string name, double salary)
-            : base(id, name)
+        public FullTimeEmployee(string name, int age, double salary, double increment)
+            : base(name, age)
         {
-            MonthlySalary = salary;
+            BasicSalary = salary;
+            Increment = increment;
         }
 
-        // Method Overriding
+        // Override Method
         public override double CalculateSalary()
         {
-            return MonthlySalary;
+            return BasicSalary + (BasicSalary * Increment / 100);
         }
 
         public override void Display()
         {
             base.Display();
             Console.WriteLine("Employee Type : Full Time");
-            Console.WriteLine("Salary : " + CalculateSalary());
+            Console.WriteLine("Basic Salary  : " + BasicSalary);
+            Console.WriteLine("Increment (%) : " + Increment);
+            Console.WriteLine("Net Salary    : " + CalculateSalary());
         }
     }
 
-    // Derived Class - Part Time Employee
+    // Part Time Employee
     class PartTimeEmployee : Employee
     {
         public int HoursWorked;
         public double HourlyRate;
 
-        public PartTimeEmployee(int id, string name, int hours, double rate)
-            : base(id, name)
+        public PartTimeEmployee(string name, int age, int hours, double rate)
+            : base(name, age)
         {
             HoursWorked = hours;
             HourlyRate = rate;
         }
 
-        // Method Overriding
         public override double CalculateSalary()
         {
             return HoursWorked * HourlyRate;
@@ -84,28 +94,77 @@ namespace EmployeePayrollSystem
         {
             base.Display();
             Console.WriteLine("Employee Type : Part Time");
-            Console.WriteLine("Hours Worked : " + HoursWorked);
-            Console.WriteLine("Hourly Rate : " + HourlyRate);
-            Console.WriteLine("Salary : " + CalculateSalary());
+            Console.WriteLine("Hours Worked  : " + HoursWorked);
+            Console.WriteLine("Hourly Rate   : " + HourlyRate);
+            Console.WriteLine("Net Salary    : " + CalculateSalary());
         }
     }
 
-    // Main Class
     class Program
     {
         static void Main(string[] args)
         {
-            // Polymorphism
-            Employee emp1 = new FullTimeEmployee(101, "Jiya", 50000);
-            Employee emp2 = new PartTimeEmployee(102, "Rahul", 120, 250);
+            Employee emp;
 
-            Console.WriteLine("===== Employee Payroll System =====\n");
+            Console.WriteLine("====== Employee Payroll System ======");
 
-            emp1.Display();
+            Console.Write("Enter Employee Name : ");
+            string name = Console.ReadLine();
 
-            Console.WriteLine();
+            Console.Write("Enter Age : ");
+            int age = Convert.ToInt32(Console.ReadLine());
 
-            emp2.Display();
+            Console.WriteLine("\nSelect Employee Type");
+            Console.WriteLine("1. Full Time");
+            Console.WriteLine("2. Part Time");
+            Console.Write("Enter Choice : ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            if (choice == 1)
+            {
+                Console.Write("Enter Basic Salary : ");
+                double salary = Convert.ToDouble(Console.ReadLine());
+
+                Console.Write("Enter Performance Rating (1-5) : ");
+                int rating = Convert.ToInt32(Console.ReadLine());
+
+                double increment = 0;
+
+                // Increment based on Performance
+                switch (rating)
+                {
+                    case 5:
+                        increment = 20;
+                        break;
+                    case 4:
+                        increment = 15;
+                        break;
+                    case 3:
+                        increment = 10;
+                        break;
+                    case 2:
+                        increment = 5;
+                        break;
+                    default:
+                        increment = 0;
+                        break;
+                }
+
+                emp = new FullTimeEmployee(name, age, salary, increment);
+            }
+            else
+            {
+                Console.Write("Enter Hours Worked : ");
+                int hours = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Enter Hourly Rate : ");
+                double rate = Convert.ToDouble(Console.ReadLine());
+
+                emp = new PartTimeEmployee(name, age, hours, rate);
+            }
+
+            Console.WriteLine("\n===== Payroll Details =====");
+            emp.Display();
 
             Console.ReadKey();
         }
