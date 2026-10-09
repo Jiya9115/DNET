@@ -1,0 +1,19 @@
+@model List<FeedbackManagement.Models.Feedback>
+
+@{
+    ViewBag.Title = "All Feedback";
+}
+
+<h3>Submitted Feedback</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div style="background:#e6f4ea; color:#1e7e34; padding:10px; margin-bottom:15px;">
+        @TempData["Success"]
+    </div>
+}
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_FeedbackCard", item)
+}

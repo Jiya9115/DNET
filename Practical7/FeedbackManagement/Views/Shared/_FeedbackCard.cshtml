@@ -1,0 +1,8 @@
+@model FeedbackManagement.Models.Feedback
+
+<div style="border:1px solid #ddd; border-left:5px solid #1f3a5f; padding:12px; margin-bottom:12px;">
+    <strong>@Model.Name</strong> &nbsp;|&nbsp; @Model.Category
+    <span style="float:right;">Rating: @Model.Rating / 5</span>
+    <p style="margin:8px 0;">@Model.Message</p>
+    <small>@Model.Email &middot; @Model.SubmittedOn.ToString("dd MMM yyyy")</small>
+</div>

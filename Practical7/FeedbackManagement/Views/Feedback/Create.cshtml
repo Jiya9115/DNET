@@ -1,0 +1,48 @@
+@model FeedbackManagement.Models.Feedback
+
+@{
+    ViewBag.Title = "Give Feedback";
+}
+
+<h3>Give Feedback</h3>
+
+@using (Html.BeginForm("Create", "Feedback", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        @Html.LabelFor(m => m.Name)<br />
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Email)<br />
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Category)<br />
+        @Html.DropDownListFor(m => m.Category,
+            new SelectList(new[] { "Course", "Faculty", "Infrastructure", "Other" }),
+            "-- Select Category --")
+        @Html.ValidationMessageFor(m => m.Category)
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Rating)<br />
+        @Html.DropDownListFor(m => m.Rating,
+            new SelectList(new[] { 1, 2, 3, 4, 5 }))
+        @Html.ValidationMessageFor(m => m.Rating)
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Message)<br />
+        @Html.TextAreaFor(m => m.Message, 5, 60, null)
+        @Html.ValidationMessageFor(m => m.Message)
+    </p>
+
+    <input type="submit" value="Submit Feedback" />
+}
