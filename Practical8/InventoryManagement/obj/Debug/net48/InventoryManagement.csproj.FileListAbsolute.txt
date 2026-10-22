@@ -1,0 +1,4 @@
+/Users/jiyaunadkat/Downloads/Practical8/InventoryManagement/obj/Debug/net48/InventoryManagement.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jiyaunadkat/Downloads/Practical8/InventoryManagement/obj/Debug/net48/InventoryManagement.AssemblyInfoInputs.cache
+/Users/jiyaunadkat/Downloads/Practical8/InventoryManagement/obj/Debug/net48/InventoryManagement.AssemblyInfo.cs
+/Users/jiyaunadkat/Downloads/Practical8/InventoryManagement/obj/Debug/net48/InventoryManagement.csproj.CoreCompileInputs.cache

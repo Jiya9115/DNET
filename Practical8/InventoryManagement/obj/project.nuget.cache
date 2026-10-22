@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "niTogiFDUao=",
+  "success": true,
+  "projectFilePath": "/Users/jiyaunadkat/Downloads/Practical8/InventoryManagement/InventoryManagement.csproj",
+  "expectedPackageFiles": [
+    "/Users/jiyaunadkat/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.3/microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "/Users/jiyaunadkat/.nuget/packages/microsoft.netframework.referenceassemblies.net48/1.0.3/microsoft.netframework.referenceassemblies.net48.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
